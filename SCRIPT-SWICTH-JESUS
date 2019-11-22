@@ -1,30 +1,37 @@
-ROUTER (JESUS) 
+SW-CORE (JESUS) 
 
 enable
 configure terminal
+hostname SW-CORE
+enable secret SenhadaEnable
 
+
+
+vlan 10
+name VLAN10
+vlan 100
+name gerenciamento
+interface fastethernet 0/1
+switchport mode access
+switchport access vlan 10
+
+exit
+interface fastethernet 0/3
+switchport mode access
+switchport access vlan 10
+exit
 interface gigabitethernet 0/1
-no shutdown
-interface g0/1.10
-encapsulation dot1Q 10
-ip address 192.168.10.1 255.255.255.0
-description rede 192.168.10.0 vlan 10
-ip helper-address 192.168.254.5
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,100,99
 exit
-interface g0/1.100
-encapsulation dot1Q 100
-ip address 192.168.254.1 255.255.255.0
-description rede 192.168.254.0 vlan 100
-ip helper-address 192.168.254.5
+interface fastethernet 0/2
+switchport mode access
+switchport access vlan 100
 exit
-
-interface serial 0/0/0
-ip address 200.200.100.2 255.255.255.252
+interface vlan 100
+ip address 192.168.254.254 255.255.255.0
 no shutdown
 exit
-
-ip route 192.168.11.0 255.255.255.0 200.200.100.1
-ip route 192.168.254.0 255.255.255.0 200.200.100.1
-
-exit
+ip default-gateway 192.168.254.1
 do wr
