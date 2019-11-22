@@ -1,45 +1,30 @@
 ROUTER (JESUS) 
+
 enable
 configure terminal
-Hostname RT-GRP02
-banner motd "CONTINUE SE FOR ATUALIZADO"
-enable secret SenhadaEnable
-line console 0 
-password SenhadaConsole
-login 
-exit
-username PedroLucca privilege 15 secret SenhaLucca
-username AndreJesus privilege 15 secret SenhaJesus
-username KevinWitt privilege 15 secret SenhaWitt
-username MarcosTeles privilege 15 secret SenhaTeles
-login block-for 240 attempts 7 within 600
-security passwords min-length 8
-ip domain-name GRUPO2.local
-crypto key generate rsa general-keys modulus 1024
-service password-encryption
+
 interface gigabitethernet 0/1
 no shutdown
-interface g0/1.12
-encapsulation dot1Q 12
-ip address 192.168.12.1 255.255.255.0
-description 192.168.12.0 vlan 12
-ip helper-address 192.168.253.5
+interface g0/1.10
+encapsulation dot1Q 10
+ip address 192.168.10.1 255.255.255.0
+description rede 192.168.10.0 vlan 10
+ip helper-address 192.168.254.5
 exit
-interface g0/1.102
-encapsulation dot1Q 102
-ip address 192.168.253.1 255.255.255.0
-description 192.168.253.0 vlan 102
-ip helper-address 192.168.253.5
+interface g0/1.100
+encapsulation dot1Q 100
+ip address 192.168.254.1 255.255.255.0
+description rede 192.168.254.0 vlan 100
+ip helper-address 192.168.254.5
 exit
+
 interface serial 0/0/0
 ip address 200.200.100.2 255.255.255.252
 no shutdown
 exit
+
 ip route 192.168.11.0 255.255.255.0 200.200.100.1
 ip route 192.168.254.0 255.255.255.0 200.200.100.1
-line vty 0 15
-transport input ssh
-exec-timeout 5 
-login local
+
 exit
 do wr
