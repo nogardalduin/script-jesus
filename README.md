@@ -4,12 +4,12 @@ SW-CORE (JESUS)
 
 enable
 configure terminal
-hostname SW-CORE
-enable secret SenhadaEnable
-line console 0 
-password SenhadaConsole
-login
-exit
+hostname SW-CORE 
+enable secret SenhadaEnable 
+line console 0  
+password SenhadaConsole 
+login 
+exit 
 username PedroLucca privilege 15 secret SenhaLucca
 username AndreJesus privilege 15 secret SenhaJesus
 username KevinWitt privilege 15 secret SenhaWitt
